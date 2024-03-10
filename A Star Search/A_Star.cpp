@@ -244,7 +244,6 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
 		}
 		if (isValid(i - 1, j + 1) == true) {
 			if (isDestination(i - 1, j + 1, dest) == true) {
-				// Set the Parent of the destination cell
 				cellDetails[i - 1][j + 1].parent_i = i;
 				cellDetails[i - 1][j + 1].parent_j = j;
 				printf("The destination cell is found\n");
@@ -327,8 +326,8 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
 			}
 		}
 		if (isValid(i + 1, j - 1) == true) {
+
 			if (isDestination(i + 1, j - 1, dest) == true) {
-				// Set the Parent of the destination cell
 				cellDetails[i + 1][j - 1].parent_i = i;
 				cellDetails[i + 1][j - 1].parent_j = j;
 				printf("The destination cell is found\n");
@@ -336,10 +335,6 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
 				foundDest = true;
 				return;
 			}
-
-			// If the successor is already on the closed
-			// list or if it is blocked, then ignore it.
-			// Else do the following
 			else if (closedList[i + 1][j - 1] == false
 					&& isUnBlocked(grid, i + 1, j - 1)
 							== true) {
@@ -347,20 +342,10 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
 				hNew = calculateHValue(i + 1, j - 1, dest);
 				fNew = gNew + hNew;
 
-				// If it isn’t on the open list, add it to
-				// the open list. Make the current square
-				// the parent of this square. Record the
-				// f, g, and h costs of the square cell
-				//			 OR
-				// If it is on the open list already, check
-				// to see if this path to that square is
-				// better, using 'f' cost as the measure.
 				if (cellDetails[i + 1][j - 1].f == FLT_MAX
 					|| cellDetails[i + 1][j - 1].f > fNew) {
 					openList.insert(make_pair(
 						fNew, make_pair(i + 1, j - 1)));
-
-					// Update the details of this cell
 					cellDetails[i + 1][j - 1].f = fNew;
 					cellDetails[i + 1][j - 1].g = gNew;
 					cellDetails[i + 1][j - 1].h = hNew;
@@ -370,24 +355,13 @@ void aStarSearch(int grid[][COL], Pair src, Pair dest)
 			}
 		}
 	}
-
-	// When the destination cell is not found and the open
-	// list is empty, then we conclude that we failed to
-	// reach the destination cell. This may happen when the
-	// there is no way to destination cell (due to
-	// blockages)
 	if (foundDest == false)
 		printf("Failed to find the Destination Cell\n");
-
 	return;
 }
 
-// Driver program to test above function
 int main()
 {
-	/* Description of the Grid-
-	1--> The cell is not blocked
-	0--> The cell is blocked */
 	int grid[ROW][COL]
 		= { { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
 			{ 1, 1, 1, 0, 1, 1, 1, 0, 1, 1 },
@@ -399,12 +373,9 @@ int main()
 			{ 1, 0, 1, 1, 1, 1, 0, 1, 1, 1 },
 			{ 1, 1, 1, 0, 0, 0, 1, 0, 0, 1 } };
 
-	// Source is the left-most bottom-most corner
 	Pair src = make_pair(8, 0);
-
-	// Destination is the left-most top-most corner
 	Pair dest = make_pair(0, 0);
-
+    
 	aStarSearch(grid, src, dest);
 
 	return (0);
