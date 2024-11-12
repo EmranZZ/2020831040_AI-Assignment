@@ -31,11 +31,11 @@ bool solveNqueens(vector<vector<int>> & board, int col){
 
     for(int i=0; i<N; i++){
         if(isSafe(board, i, col)){
-            board[i][col] = 1; 
+            board[i][col] == 1; 
             if(solveNqueens(board, col+1)){
                 return true;
             }
-            board[i][col] = 0; 
+            board[i][col]==0; 
         }
     }
     return false; 
