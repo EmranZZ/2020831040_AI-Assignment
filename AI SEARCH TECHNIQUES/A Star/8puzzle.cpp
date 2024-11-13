@@ -81,7 +81,7 @@ void solve8Puzzle(vector<vector<int>> start, vector<vector<int>> goal) {
         pq.pop();
 
         if (current.state == goal) {
-            cout << "Solution found with path: " << current.path <<" "<< endl;
+            cout << "Solution found with path: " << current.path <<" "<< endl; //0->down, 1->right, 2->up, 3->left
             printState(current.state);
             return;
         }
